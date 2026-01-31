@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Заказы - Админ-панель</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #1d1d1f;
+        --secondary-color: #f5f5f7;
+        --accent-color: #0071e3;
+        --text-dark: #1d1d1f;
+        --text-light: #86868b;
+        --crocs-green: #00aa72;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "SF Pro Display", sans-serif;
+        color: var(--text-dark);
+        background: var(--secondary-color);
+        line-height: 1.6;
+      }
+
+      .admin-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: 100vh;
+      }
+
+      .admin-sidebar {
+        background: var(--text-dark);
+        color: white;
+        padding: 30px 0;
+      }
+
+      .admin-logo {
+        padding: 0 30px;
+        margin-bottom: 40px;
+      }
+
+      .admin-logo h1 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .admin-logo p {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 5px;
+      }
+
+      .admin-menu {
+        list-style: none;
+      }
+
+      .admin-menu li {
+        margin-bottom: 5px;
+      }
+
+      .admin-menu a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 30px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .admin-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .admin-menu a.active {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-right: 3px solid white;
+      }
+
+      .admin-content {
+        padding: 40px;
+      }
+
+      .admin-header {
+        margin-bottom: 40px;
+      }
+
+      .admin-header h2 {
+        font-size: 36px;
+        font-weight: 700;
+      }
+
+      .alert {
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+      }
+
+      .alert-success {
+        background: #e5f8ec;
+        color: #34c759;
+        border-left: 4px solid #34c759;
+      }
+
+      .orders-list {
+        display: grid;
+        gap: 20px;
+      }
+
+      .order-card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        transition: transform 0.3s;
+      }
+
+      .order-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .order-id {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .order-date {
+        color: var(--text-light);
+        font-size: 14px;
+      }
+
+      .order-body {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .order-customer h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .order-customer p {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 5px;
+      }
+
+      .order-items {
+        margin-top: 15px;
+      }
+
+      .order-items h5 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: var(--text-light);
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 14px;
+      }
+
+      .order-summary {
+        background: var(--secondary-color);
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .summary-row.total {
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #d0d0d0;
+      }
+
+      .order-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .status-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .status-form select {
+        padding: 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+        cursor: pointer;
+      }
+
+      .status-form select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+
+      .btn {
+        padding: 10px 20px;
+        background: var(--text-dark);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn:hover {
+        background: #333;
+      }
+
+      .order-status {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .order-status.pending {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .order-status.processing {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .order-status.shipped {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .order-status.delivered {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .order-status.cancelled {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .empty-state {
+        background: white;
+        border-radius: 16px;
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      .empty-state-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+      }
+
+      .empty-state h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .empty-state p {
+        color: var(--text-light);
+      }
+
+      @media (max-width: 968px) {
+        .admin-container {
+          grid-template-columns: 1fr;
+        }
+
+        .order-body {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container">
+      <aside class="admin-sidebar">
+        <div class="admin-logo">
+          <h1>🩴 Админ-панель</h1>
+          <p>{{ current_user.username }}</p>
+        </div>
+
+        <ul class="admin-menu">
+          <li><a href="/admin">📊 Главная</a></li>
+          <li><a href="/admin/products">📦 Товары</a></li>
+          <li><a href="/admin/orders" class="active">🛒 Заказы</a></li>
+          <li><a href="/">🌐 На сайт</a></li>
+          <li><a href="/logout">🚪 Выход</a></li>
+        </ul>
+      </aside>
+
+      <main class="admin-content">
+        <div class="admin-header">
+          <h2>Управление заказами</h2>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% if orders %}
+        <div class="orders-list">
+          {% for order in orders %}
+          <div class="order-card">
+            <div class="order-header">
+              <div>
+                <div class="order-id">Заказ #{{ loop.index }}</div>
+                <div class="order-date">
+                  {{ order.created_at.strftime('%d.%m.%Y %H:%M') }}
+                </div>
+              </div>
+              <div class="order-status {{ order.status }}">
+                {% if order.status == 'pending' %}Ожидает обработки {% elif
+                order.status == 'processing' %}В обработке {% elif order.status
+                == 'shipped' %}Отправлен {% elif order.status == 'delivered'
+                %}Доставлен {% elif order.status == 'cancelled' %}Отменен {%
+                else %}{{ order.status }} {% endif %}
+              </div>
+            </div>
+
+            <div class="order-body">
+              <div class="order-customer">
+                <h4>Информация о клиенте</h4>
+                <p><strong>Email:</strong> {{ order.user_email }}</p>
+                <p><strong>Имя:</strong> {{ order.shipping_info.name }}</p>
+                <p><strong>Телефон:</strong> {{ order.shipping_info.phone }}</p>
+                <p>
+                  <strong>Адрес:</strong> {{ order.shipping_info.address }}, {{
+                  order.shipping_info.city }}, {{
+                  order.shipping_info.postal_code }}
+                </p>
+
+                <div class="order-items">
+                  <h5>Товары:</h5>
+                  {% for item in order.items %}
+                  <div class="order-item">
+                    <span>{{ item.name }} × {{ item.quantity }}</span>
+                    <span>{{ item.total }} ₽</span>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="order-summary">
+                <h4 style="margin-bottom: 15px">Итого</h4>
+                <div class="summary-row">
+                  <span>Товары</span>
+                  <span>{{ order.total }} ₽</span>
+                </div>
+                <div class="summary-row">
+                  <span>Доставка</span>
+                  <span>Бесплатно</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Итого</span>
+                  <span>{{ order.total }} ₽</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-footer">
+              <form
+                method="POST"
+                action="/admin/orders/{{ order._id }}/status"
+                class="status-form"
+              >
+                <label for="status-{{ loop.index }}">Изменить статус:</label>
+                <select name="status" id="status-{{ loop.index }}">
+                  <option
+                    value="pending"
+                    {%
+                    if
+                    order.status=""
+                    ="pending"
+                    %}selected{%
+                    endif
+                    %}
+                  >
+                    Ожидает обработки
+                  </option>
+                  <option
+                    value="processing"
+                    {%
+                    if
+                    order.status=""
+                    ="processing"
+                    %}selected{%
+                    endif
+                    %}
+                  >
+                    В обработке
+                  </option>
+                  <option
+                    value="shipped"
+                    {%
+                    if
+                    order.status=""
+                    ="shipped"
+                    %}selected{%
+                    endif
+                    %}
+                  >
+                    Отправлен
+                  </option>
+                  <option
+                    value="delivered"
+                    {%
+                    if
+                    order.status=""
+                    ="delivered"
+                    %}selected{%
+                    endif
+                    %}
+                  >
+                    Доставлен
+                  </option>
+                  <option
+                    value="cancelled"
+                    {%
+                    if
+                    order.status=""
+                    ="cancelled"
+                    %}selected{%
+                    endif
+                    %}
+                  >
+                    Отменен
+                  </option>
+                </select>
+                <button type="submit" class="btn">Обновить</button>
+              </form>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+          <div class="empty-state-icon">🛒</div>
+          <h3>Заказов пока нет</h3>
+          <p>Когда пользователи оформят заказы, они появятся здесь</p>
+        </div>
+        {% endif %}
+      </main>
+    </div>
+  </body>
+</html>

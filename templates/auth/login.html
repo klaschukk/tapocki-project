@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход - BalconySlippers</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #1d1d1f;
+        --secondary-color: #f5f5f7;
+        --accent-color: #0071e3;
+        --text-dark: #1d1d1f;
+        --text-light: #86868b;
+        --crocs-green: #00aa72;
+        --error-color: #ff3b30;
+        --success-color: #34c759;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "SF Pro Display", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .auth-container {
+        background: white;
+        border-radius: 20px;
+        padding: 50px;
+        max-width: 450px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 0.6s ease;
+      }
+
+      .logo-link {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        font-size: 48px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-align: center;
+        letter-spacing: -1px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: var(--text-light);
+        margin-bottom: 40px;
+        font-size: 16px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: var(--text-dark);
+      }
+
+      input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 16px;
+        background: var(--text-dark);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background: #333;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .link-text {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      .link-text a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .link-text a:hover {
+        text-decoration: underline;
+      }
+
+      .alert {
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        font-size: 14px;
+      }
+
+      .alert-error {
+        background: #ffe5e5;
+        color: var(--error-color);
+        border-left: 4px solid var(--error-color);
+      }
+
+      .alert-success {
+        background: #e5f8ec;
+        color: var(--success-color);
+        border-left: 4px solid var(--success-color);
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .remember-me input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+      }
+
+      .remember-me label {
+        margin-bottom: 0;
+        font-weight: 400;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .auth-container {
+          padding: 40px 30px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-container">
+      <a href="/" class="logo-link">
+        <span class="logo">🩴</span>
+      </a>
+
+      <h1>Вход</h1>
+      <p class="subtitle">Войдите в свой аккаунт</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <form method="POST" action="{{ url_for('auth.login') }}">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="ivan@example.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Введите пароль"
+          />
+        </div>
+
+        <button type="submit" class="btn">Войти</button>
+      </form>
+
+      <p class="link-text">
+        Нет аккаунта?
+        <a href="{{ url_for('auth.register') }}">Зарегистрироваться</a>
+      </p>
+    </div>
+  </body>
+</html>
