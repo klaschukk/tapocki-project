@@ -5,7 +5,7 @@ from datetime import datetime
 
 class User(UserMixin):
     def __init__(self, user_data):
-        self.id = str(user_data.get('_id', ''))
+        self.id = str(user_data.get('id', user_data.get('_id', '')))
         self.email = user_data.get('email', '')
         self.username = user_data.get('username', '')
         self.password_hash = user_data.get('password_hash', '')
@@ -14,20 +14,16 @@ class User(UserMixin):
 
     @staticmethod
     def create_user(email, username, password, is_admin=False):
-        """Создать нового пользователя"""
         return {
             'email': email,
             'username': username,
-            # ИЗМЕНИЛИ ЭТО
             'password_hash': generate_password_hash(password, method='pbkdf2:sha256'),
             'is_admin': is_admin,
-            'created_at': datetime.now()
+            'created_at': datetime.now(),
         }
 
     def check_password(self, password):
-        """Проверить пароль"""
         return check_password_hash(self.password_hash, password)
 
     def get_id(self):
-        """Для flask-login"""
         return self.id
