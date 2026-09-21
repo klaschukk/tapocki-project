@@ -1,65 +1,57 @@
-*вайб кодинг чек
+# BalconySlippers
 
-# 🩴 BalconySlippers - Интернет-магазин тапочек
+**A small full-stack online shop for slippers** — catalogue, cart, checkout, customer accounts and an admin panel, built with Flask.
 
-Полнофункциональный интернет-магазин с админ-панелью, корзиной и системой заказов.
+The storefront is in Russian. It is a learning project and runs on an in-memory store, so it needs no database and resets when the server restarts.
 
-## 🚀 Технологии
+![Home page](docs/screenshots/home.png)
 
-- **Backend:** Flask + Python
-- **Database:** MongoDB
-- **Frontend:** HTML/CSS/JS + Jinja2
-- **Auth:** Flask-Login
+## Features
 
-## ⚙️ Установка
+**Shoppers**
+- Catalogue with category filters and a product page for every model
+- Cart with quantity updates, then checkout
+- Registration, login and a profile page
+
+**Admin panel**
+- Dashboard, product create / edit / delete
+- Order list with status updates
+
+**Also**
+- JSON endpoints: `/api/products`, `/api/product/<id>`, `/api/cart/count`
+
+## Stack
+
+| | |
+|---|---|
+| Backend | Flask 3, Flask-Login, Werkzeug password hashing |
+| Templates | Jinja2, plain HTML / CSS / JS |
+| Data | In-memory store seeded with sample products (`database/db.py`) |
+
+## Run it
+
 ```bash
-# Клонируй репозиторий
-git clone https://github.com/your-username/balcony-slippers.git
-cd balcony-slippers
-
-# Установи зависимости
-pip3 install -r requirements.txt
-
-# Запусти MongoDB
-brew services start mongodb-community
-
-# Заполни базу данных
-python3 seed_database.py
-
-# Создай админа
-python3 create_admin.py
-
-# Запусти сервер
-python3 app.py
+pip install -r requirements.txt
+python run.py          # http://localhost:5004
 ```
 
-## 📋 Возможности
+A demo admin account is seeded in `database/db.py` (`_SEED_ADMIN`). Change its credentials before exposing the app anywhere but your own machine.
 
-### Для пользователей:
-- ✅ Регистрация и авторизация
-- ✅ Каталог товаров с фильтрами
-- ✅ Корзина покупок
-- ✅ Оформление заказов
-- ✅ Личный кабинет
+## Screens
 
-### Для администратора:
-- ✅ Панель управления
-- ✅ Управление товарами (CRUD)
-- ✅ Управление заказами
-- ✅ Статистика продаж
+<table>
+  <tr>
+    <td width="66%"><img src="docs/screenshots/catalog.png" alt="Catalogue"></td>
+    <td width="34%"><img src="docs/screenshots/mobile.png" alt="Mobile home page"></td>
+  </tr>
+</table>
 
-## 🔑 Доступы
+## Project layout
 
-**Админ:**
-- Email: admin@balconyslippers.com
-- Пароль: admin123
-
-## 📸 Скриншоты
-
-(Добавь скриншоты позже)
-
-## 📝 Лицензия
-
-MIT
-# tapocki-project
-# tapocki-project
+```
+app.py · run.py        entry points
+routes/                main, products, cart, auth, admin blueprints
+models/                user and order models
+database/db.py         in-memory store and seed data
+templates/ · static/   Jinja2 templates and assets
+```
