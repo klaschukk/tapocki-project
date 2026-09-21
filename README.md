@@ -1,4 +1,4 @@
-# BalconySlippers
+<a href="https://github.com/klaschukk/tapocki-project"><img src="docs/banner.svg" alt="BalconySlippers — a small full-stack online shop" width="100%"></a>
 
 **A small full-stack online shop for slippers** — catalogue, cart, checkout, customer accounts and an admin panel, built with Flask.
 

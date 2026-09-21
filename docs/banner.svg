@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="BalconySlippers — Catalogue, cart, checkout and an admin panel">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset=".6" stop-color="#0d1526"/><stop offset="1" stop-color="#34d399" stop-opacity=".22"/></linearGradient>
+<linearGradient id="tt" x1="0" x2="1"><stop offset="0" stop-color="#34d399"><animate attributeName="stop-color" values="#34d399;#a7f3d0;#34d399" dur="8s" repeatCount="indefinite"/></stop><stop offset="1" stop-color="#a7f3d0"/></linearGradient>
+<radialGradient id="gl" cx=".2" cy=".1" r=".7"><stop offset="0" stop-color="#34d399" stop-opacity=".28"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient>
+<pattern id="gr" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/></pattern>
+<clipPath id="r"><rect width="1200" height="300" rx="22"/></clipPath>
+</defs>
+<style>
+.grow{transform-box:fill-box;transform-origin:bottom;animation:gr 3.2s ease-in-out infinite alternate}@keyframes gr{from{transform:scaleY(.55)}to{transform:scaleY(1)}}
+.slide{animation:sl 4s ease-in-out infinite alternate}@keyframes sl{from{transform:translateX(-10px);opacity:.55}to{transform:none;opacity:1}}
+.float{animation:fl 3.6s ease-in-out infinite alternate}@keyframes fl{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
+.fill{animation:fi 3s ease-in-out infinite alternate}@keyframes fi{from{width:14px}to{width:var(--w)}}
+.in{opacity:0;animation:up .9s ease-out forwards}@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<g clip-path="url(#r)">
+<rect width="1200" height="300" fill="#0b1020"/><rect width="1200" height="300" fill="url(#bg)"/><rect width="1200" height="300" fill="url(#gr)"/><rect width="1200" height="300" fill="url(#gl)"/>
+<g class="in"><text x="76" y="86" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="14" letter-spacing="4" fill="#8b98a9">FULL-STACK DEMO SHOP</text></g>
+<text class="in" style="animation-delay:.15s" x="74" y="146" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="52" font-weight="800" letter-spacing="-1" fill="url(#tt)">BalconySlippers</text>
+<text class="in" style="animation-delay:.3s" x="76" y="196" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="21" fill="#c9d1d9">Catalogue, cart, checkout and an admin panel</text>
+<g class="in" style="animation-delay:.45s"><rect x="76" y="222" width="73" height="32" rx="11" fill="#34d399" fill-opacity=".13" stroke="#34d399" stroke-opacity=".5"/><text x="112" y="243" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="14" fill="#e6edf3">Flask</text><rect x="159" y="222" width="82" height="32" rx="11" fill="#34d399" fill-opacity=".13" stroke="#34d399" stroke-opacity=".5"/><text x="200" y="243" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="14" fill="#e6edf3">Jinja2</text><rect x="251" y="222" width="127" height="32" rx="11" fill="#34d399" fill-opacity=".13" stroke="#34d399" stroke-opacity=".5"/><text x="314" y="243" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="14" fill="#e6edf3">Flask-Login</text></g>
+<g class="float" style="animation-delay:0.0s"><rect x="770" y="70" width="112" height="150" rx="16" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".16"/><ellipse cx="826" cy="126" rx="34" ry="18" fill="#34d399" fill-opacity=".35" stroke="#34d399"/><rect x="786" y="168" width="60" height="8" rx="4" fill="#fff" fill-opacity=".35"/><rect x="786" y="186" width="38" height="8" rx="4" fill="#34d399"/></g><g class="float" style="animation-delay:0.5s"><rect x="900" y="70" width="112" height="150" rx="16" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".16"/><ellipse cx="956" cy="126" rx="34" ry="18" fill="#60a5fa" fill-opacity=".35" stroke="#60a5fa"/><rect x="916" y="168" width="60" height="8" rx="4" fill="#fff" fill-opacity=".35"/><rect x="916" y="186" width="38" height="8" rx="4" fill="#60a5fa"/></g><g class="float" style="animation-delay:1.0s"><rect x="1030" y="70" width="112" height="150" rx="16" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".16"/><ellipse cx="1086" cy="126" rx="34" ry="18" fill="#f472b6" fill-opacity=".35" stroke="#f472b6"/><rect x="1046" y="168" width="60" height="8" rx="4" fill="#fff" fill-opacity=".35"/><rect x="1046" y="186" width="38" height="8" rx="4" fill="#f472b6"/></g><g transform="translate(1090 40)"><circle r="17" fill="#34d399"><animate attributeName="r" values="15;19;15" dur="2.4s" repeatCount="indefinite"/></circle><text y="5" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="14" font-weight="700" fill="#06251a">+1</text></g>
+</g>
+<rect x=".5" y=".5" width="1199" height="299" rx="22" fill="none" stroke="#fff" stroke-opacity=".12"/>
+</svg>
